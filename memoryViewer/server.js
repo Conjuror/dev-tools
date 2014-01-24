@@ -15,7 +15,7 @@ var http = require("http");
 var path = require("path");
 var fs = require("fs");
 
-console.log("Starting web server at " + serverUrl + ":" + port);
+// console.log("Starting web server at " + serverUrl + ":" + port);
 
 server = http.createServer(function(req, res) {
 
@@ -95,7 +95,7 @@ function runShell() {
   child = exec('adb shell b2g-procrank',
     function(error, stdout, stderr) {
       updateData(stdout);
-      console.log('stdout: ' + stdout);
+      // console.log('stdout: ' + stdout);
       // console.log('stderr: ' + stderr);
       if (error !== null) {
         console.log('exec error: ' + error);
@@ -103,4 +103,12 @@ function runShell() {
     });
 }
 
-setInterval(runShell, 1000);
+io.sockets.on('connection', function (socket) {
+  timer = setInterval(runShell, 1000);
+
+  socket.on('disconnect', function() {
+    clearInterval(timer);
+  });
+});
+
+

@@ -3,13 +3,16 @@
     <meta charset="UTF-8">
     <title>Memory Viewer</title>
     <link rel="SHORTCUT ICON" href="/favicon.ico"></link>
+    <link rel="stylesheet" href="tablesorter/themes/blue/style.css" type="text/css" media="print, projection, screen" />
     <script src="//code.jquery.com/jquery-1.10.2.js"></script>
+    <script src="tablesorter/jquery.tablesorter.min.js"></script>
     <script src="/socket.io/socket.io.js"></script>
     <script src="viewer.js"></script>
 </head>
 <body>
+    <h1> Real Time info </h1>
     <div id="real time">
-        <table id="rtTable">
+        <table id="rtTable" class="tablesorter">
             <thead>
                 <tr>
                     <th>APPLICATION</th>
@@ -25,5 +28,22 @@
             </tbody>
         </table>
     </div>
-    <div id="peak"><table id="peakTable"></table></div>
+    <h1> Peak Memory Usage </h1>
+    <div id="peak">
+        <table id="peakTable" class="tablesorter">
+            <thead>
+                <tr>
+                    <th>APPLICATION</th>
+                    <th>Vss</th>
+                    <th>Rss</th>
+                    <th>Pss</th>
+                    <th>Uss</th>
+                    <th>cmdline</th>
+                </tr>
+            </thead>
+            <tbody>
+            </tbody>
+        </table>
+        <input type="button" id="clean_btn" value="Clean Peak"/>
+    </div>
 </body>
