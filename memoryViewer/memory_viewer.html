@@ -1,0 +1,29 @@
+<!DOCTYPE html>
+<head>
+    <meta charset="UTF-8">
+    <title>Memory Viewer</title>
+    <link rel="SHORTCUT ICON" href="/favicon.ico"></link>
+    <script src="//code.jquery.com/jquery-1.10.2.js"></script>
+    <script src="/socket.io/socket.io.js"></script>
+    <script src="viewer.js"></script>
+</head>
+<body>
+    <div id="real time">
+        <table id="rtTable">
+            <thead>
+                <tr>
+                    <th>APPLICATION</th>
+                    <th>PID</th>
+                    <th>Vss</th>
+                    <th>Rss</th>
+                    <th>Pss</th>
+                    <th>Uss</th>
+                    <th>cmdline</th>
+                </tr>
+            </thead>
+            <tbody>
+            </tbody>
+        </table>
+    </div>
+    <div id="peak"><table id="peakTable"></table></div>
+</body>
