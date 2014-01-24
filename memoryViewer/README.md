@@ -9,5 +9,5 @@ If there's a version number, you can use the following command to execute the se
 
     $ node server.js
 
-And visit http://localhost:8000/memory_viewer.html
+And visit [http://localhost:8000/memory_viewer.html](http://localhost:8000/memory_viewer.html)
 
