@@ -5,16 +5,18 @@
 
 import urllib2
 import json
+import re
 from openpyxl import Workbook
 
 class TestCase:
 
-    def __init__(self, caseId, title, description, suites, tags):
+    def __init__(self, caseId="", title="", description="", suites="", tags="", feature=""):
         self.__dict__["caseId"] = caseId
         self.__dict__["title"] = title
         self.__dict__["description"] = description
         self.__dict__["suites"] = suites
         self.__dict__["tags"]= tags
+        self.__dict__["feature"] = feature
 
 def query_REST(base, url):
     response = urllib2.urlopen(base+url).read()
@@ -30,13 +32,11 @@ def getSuites(caseId):
         if suiteDict.has_key(suiteObj['suite']):
             suites.append(suiteDict[suiteObj['suite']])
         else:
-            print base+'/api/v1/suite/'+suiteObj['suite'][14:-1]+"?format=json"
             suiteResult = urllib2.urlopen(base+'/api/v1/suite/'+suiteObj['suite'][14:-1]+"?format=json").read()
             suiteData = json.loads(suiteResult)
             suiteDict.update({suiteObj['suite']:suiteData['name']})
             suites.append(suiteData['name'])
-    return '\n'.join(suites)
-
+    return suites
 
 
 def testcase_parser(cases):
@@ -59,11 +59,17 @@ def testcase_parser(cases):
             descriptionString = description + '\n'
         descriptionString = descriptionString + '[Instructions]\n' + '\n'.join(instructions) + '\n[Expected]\n' + '\n'.join(expected)
         tags = []
+        feature = []
         for tag in case['tags']:
             tags.append(tag['name'])
+            m = re.match("^(\D+)([0-9]+)", tag['name'])
+            if m != None and m.group(1).strip(" ").lower() != "bug":
+                feature.append(m.group(1).strip(" -"))
+        featureString = '\n'.join(feature)
         tagsString = '\n'.join(tags)
-        suitesString = getSuites(caseId)
-        testCases.append(TestCase(caseId, title, descriptionString, suitesString, tagsString))
+        suites=getSuites(caseId)                    
+        suitesString = '\n'.join(suites)
+        testCases.append(TestCase(caseId, title, descriptionString, suitesString, tagsString, featureString))
     return testCases
 
 
@@ -94,6 +100,7 @@ def dump_to_excel(filename, testCases):
     ws.cell(row = 1, column = 3).value = "Description"
     ws.cell(row = 1, column = 4).value = "Suites"
     ws.cell(row = 1, column = 5).value = "Tags"
+    ws.cell(row = 1, column = 6).value = "Feature"
 
     for index, testCase in enumerate(testCases):
         i = index + 2
@@ -102,14 +109,16 @@ def dump_to_excel(filename, testCases):
         ws.cell(row = i, column = 3).value = testCase.description
         ws.cell(row = i, column = 4).value = testCase.suites
         ws.cell(row = i, column = 5).value = testCase.tags
+        ws.cell(row = i, column = 6).value = testCase.feature
 
     wb.save(filename)
 
 def main():
     base = 'https://moztrap.mozilla.org'
-    url = '/api/v1/caseversion/?limit=20&productversion=177&username=atsai&api_key=dec0aa2d-64ea-4b73-a9b0-43b64f0e621d&format=json'
+    url = '/api/v1/caseversion/?limit=100&productversion=177&username=atsai&api_key=dec0aa2d-64ea-4b73-a9b0-43b64f0e621d&format=json'
+    xlsxFilename = 'moztrap_fxos_test_case_2.0.xlsx'
     testCases = moztrap_parser(base, url)
-    dump_to_excel('moztrap_fxos_test_case_2.0.xlsx', testCases)
+    dump_to_excel(xlsxFilename, testCases)
 
 if __name__ == '__main__':
     main()
