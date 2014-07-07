@@ -113,9 +113,11 @@ def dump_to_excel(filename, testCases):
 
     wb.save(filename)
 
-def main():
+def main(productversion="", username="", api_key="", limit=100):
+    if len(productversion) == 0 or len(username) == 0 or len(api_key) == 0:
+        print "Please give productversion, username, and api_key"
     base = 'https://moztrap.mozilla.org'
-    url = '/api/v1/caseversion/?limit=100&productversion=177&username=atsai&api_key=dec0aa2d-64ea-4b73-a9b0-43b64f0e621d&format=json'
+    url = '/api/v1/caseversion/?format=json&productversion='+productversion+'&username='+username+'&api_key='+api_key+'&limit='+str(limit)
     xlsxFilename = 'moztrap_fxos_test_case_2.0.xlsx'
     testCases = moztrap_parser(base, url)
     dump_to_excel(xlsxFilename, testCases)
