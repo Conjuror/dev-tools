@@ -24,18 +24,22 @@ def query_REST(base, url):
 
 def getSuites(caseId):
     global suiteDict
+    global wantedSuite
+    global ignoreSuite
     base = 'https://moztrap.mozilla.org'
     suites = []
     suitecaseResult = urllib2.urlopen(base+"/api/v1/suitecase/?case="+caseId[13:-1]+"&format=json").read()
     suitecaseJson = json.loads(suitecaseResult)
     for suiteObj in suitecaseJson['objects']:
-        if suiteDict.has_key(suiteObj['suite']):
-            suites.append(suiteDict[suiteObj['suite']])
-        else:
+        if not suiteDict.has_key(suiteObj['suite']):
             suiteResult = urllib2.urlopen(base+'/api/v1/suite/'+suiteObj['suite'][14:-1]+"?format=json").read()
             suiteData = json.loads(suiteResult)
             suiteDict.update({suiteObj['suite']:suiteData['name']})
-            suites.append(suiteData['name'])
+        if suiteDict[suiteObj['suite']] in wantedSuite:
+            suites.append(suiteDict[suiteObj['suite']])
+        elif not suiteDict[suiteObj['suite']] in ignoreSuite:
+            print "IGNORE: " + suiteDict[suiteObj['suite']]
+            ignoreSuite.append(suiteDict[suiteObj['suite']])
     return suites
 
 
@@ -122,5 +126,16 @@ def main(productversion="", username="", api_key="", limit=100):
     testCases = moztrap_parser(base, url)
     dump_to_excel(xlsxFilename, testCases)
 
+def loadSuites():
+    f = open('suite_list', 'r')
+    global wantedSuite
+    global ignoreSuite
+    wantedSuite = []
+    ignoreSuite = []
+    for s in f.readlines():
+        wantedSuite.append(s.strip('\n'))
+    f.close()
+
 if __name__ == '__main__':
-    main()
+    loadSuites()
+    main("177", "atsai", "dec0aa2d-64ea-4b73-a9b0-43b64f0e621d")

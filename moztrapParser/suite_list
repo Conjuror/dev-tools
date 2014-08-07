@@ -1,0 +1,101 @@
+[Comms]Dialer
+[Comms]Contacts
+[Comms]Message-Delivery Report
+[Comms]Message-DraftMode
+[Comms]Message-Recipient
+[Comms]Messages-Forward Message
+[Comms]MMS
+[Comms]sms
+[Comms]Cost Control (new to 1.2)
+[Comms]CDMA
+[Comms]Multi-SIM
+[Comms]Settings-SIM manager
+[Comms]Settings - SIM manager
+[BT]Bluetooth
+[Device]FOTA/OTA Data Migration
+[Device]OTA/FOTA Functional Test
+[Media PF]getUserMedia API
+[Media PF]Media Recording API
+[Media PF]Web Audio API
+[Media PF]WebRTC P2P
+[Media]Music
+[Media]B2G Video
+[Media]Camera
+[Media]Gallery
+[Media]everything.me homescreen
+[Media]FMRadio
+[Sys FE] Download Manager
+[Sys FE] Vertical Homescreen
+[Sys FE]Browser
+[Sys FE]First Time User/FTE
+[Sys PF]Airplane Mode
+[Sys PF]Home/Homescreen/Wrapper
+[Sys PF]homescreen
+[Sys PF]Keyboard
+[Sys PF]Keyboard & Text-Handling
+[Sys PF]Keyboard OOM
+[Sys PF][Fx OS feature][Keyboard] Auto-correction
+[Sys PF]Lock Screen/Phone Lock
+[Sys PF]Settings - Applications
+[Sys PF]Settings - Battery
+[Sys PF]Settings - Bluetooth
+[Sys PF]Settings - Date & Time
+[Sys PF]Settings - Device Information
+[Sys PF]Settings - Display
+[Sys PF]Settings - Do Not Track
+[Sys PF]Settings - Help
+[Sys PF]Settings - Keyboard
+[Sys PF]Settings - Language & Region
+[Sys PF]Settings - Media Storage
+[Sys PF]Settings - Menu
+[Sys PF]Settings - Phone Lock
+[Sys PF]Settings - Privacy
+[Sys PF]Settings - Settings list
+[Sys PF]Settings - Sound
+[Sys PF]Settings Apps Permissions
+[Sys PF]Settings - SIM Lock
+[Sys PF]SIM Lock
+[Sys PF]Third party keyboard
+[Sys PF]Settings  - Device Storage
+[Prod]Clock
+[Prod]Calendar
+[Prod]Email
+[Prod]Email - POP3
+[RIL] WPA EAP - TTLS/PEAP test suite
+[RIL]Captive Portal redirects
+[RIL]CDMA Release Acceptance Test
+[RIL]CDMA RIL
+[RIL]Cellular & Data
+[RIL]EAP-SIM functional validation
+[RIL]Internet sharing (Wifi Hostpot and USB Tethering)
+[RIL]IPv6 Testing
+[RIL]LTE testing
+[RIL]NFC
+[RIL]RTSP Audio/only
+[RIL]SIM PUK
+[RIL]simtoolkit
+[RIL]Streaming
+[RIL]Wap Push 1.2
+[RIL]WiFi
+[RIL]WPA-EAP functional test
+[RIL][FxOS] RTSP
+App Errors
+App Permissions
+App Updates
+Card View/Task Switcher/Task Manager
+File Management
+Gestures
+Geolocation
+MIME Type Test
+Notifications/Status Bar/Utility Tray
+PDF Viewer
+Ringtones
+Roaming Charge
+Rocketbar
+SIM Security
+System Overlays
+System Updates
+USB Mass Storage
+Web Activities
+Web Notifications API
+Window.open
